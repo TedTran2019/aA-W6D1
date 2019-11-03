@@ -104,3 +104,57 @@ Asynchronous solution:
 	calls any JS code that has been registered as handler when event occurs
 --------------------------------------------------------------------------
 Client-side Javascript:
+- JS for browser to execute
+- Browsers and Node.js are JS runtimes/environments
+	a. expose functionality that JS scripts can access thru APIs
+- document.getElementById("")....
+- File IO nor DOM manipulation are part of Javascript, they are functionalities
+	provided by environment
+
+What to do for non-ES6 compatible browsers?
+- Ignore them (not viable for production)
+- polyfill, aka test for existence of a certain function and provide a hand-spun ver
+- Transpile to ES5 using tools like Babel
+-------------------------------------------------------------------------
+Webpack Tutorial: All these can be set in the config file
+https://webpack.js.org/concepts/
+- entry point indicates which module webpack should use to begin building out its
+	internal dependency graph. default: ./src/index.js
+- output property tells webpack where to emit the bundles it creates and how to
+	name these files. default: ./dist/main.js
+- loader: 2 properties
+	a. The test property identifies which file or files should be transformed.
+	b.The use property indicates which loader should be used to do the transforming.
+- plugins: extend Webpack capabilitie
+	a. require() to add it to the plugins array, customizable thru options
+	b. can create an instance of plugin using new operator
+- mode: can optimize for a particular environment or none
+- supports all browsers that are ES-5 compliant and above
+
+- Better to install webpack locally rather than globally, easier to
+	upgrade projects individually
+	a. npm uninstall -g webpack
+- To locally install
+	a. npm init -y
+	b. npm install webpack webpack-cli --save-dev
+	c. in package.json, mark package private and remove the main entry (webpack)
+	d. notice directory structure: src code and dist code separate
+	e. If you wish to bundle external module dependencies, install it locally
+		e.g npm install --save lodash (this is used for production bundle)
+		- If for development, use npm install --save-dev
+	f. npx webpack
+	g. webpack supports import/export out of the box, supports config files as well
+		- webpack.config.js
+		- npx webpack --config webpack.config.js (the end is unnecessary bc it does by default)
+	h. Can set up npm scripts in config file
+		- e.g npm run build
+	i. https://webpack.js.org/guides/asset-management/ -> for CSS, images, etc...
+----------------------------------------------------------------------------
+Canvas:
+- canvas element has default width 300px and height 150px
+- addEventListener(), "DOMContentLoaded" to wait for page to be loaded then look
+- grab canvas element -> set height/width -> ctx = the_canvas.getContext('2d')
+- Do everything on ctx!
+https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
+Basic animations! That's actually really cool.
+--------------------------------------------------------------------------

@@ -1,0 +1,106 @@
+Prototypical Inheritance:
+- Review __proto__, #prototype, up the prototype chain
+- Prototype is an instance of the Object class, constructor is object
+- Ways to do inheritance
+	a. Class_1.prototype = Class_2.prototype, boom, prototypical inheritance!
+	b. Object.create(Class.prototype)
+	c. extends
+
+webpack --watch root.js bundle.js -> That was pretty cool
+#hasOwnProperty('etc)
+The end of a proto chain is null
+
+Ways to do
+	a. let Surrogate = function() {}
+			Surrogate.prototype = ClassToInheritFrom.prototype;
+			ClassYouWantToInherit.prototype = new Surrogate();
+		REASON for surrogate is so etc constructor function isn't run. So empty
+		surrogate instead...
+		Inside of regular constructor, do ClassToInheritFrom.call(this, ...args);
+		ClassYouWantToInherit.prototype.constructor = ClassYouWantToInherit
+
+Don't do two things at once, give a single task your full attention. *****
+------------------------------------------------------------------------
+Javascript in Browser:
+- script src tags
+- script src bundle.js, can still use require and module.exports syntax
+	a. Or import/export for ES6 ( Doesn't matter)
+- webpack (root of tree of files) bundle.js
+	a. Nothing gets put in global namespace
+
+Prototypical Inheritance again:
+- Object is the top level class, proof: Object.prototype.__proto__ === null
+"Now you might be wondering why we don't just call Dog.prototype = Animal.prototype.
+ We don't do this because that means any function added to Dog would also be added
+ to Animal."
+"anything that alters the prototype of an object will lead to very poor performance.
+For these reasons we don't want to use __proto__ to manage inheritance."
+- Object.setPrototypeOf also shouldn't be used, performance hits bc of altering
+	an object's prototype.
+- Workaround is to create an entirely new prototype object
+	a. Object.create
+		- Dog.prototype = Object.create(Animal.prototype);
+		- Dog.prototype.constructor = Dog
+		- Inside Dog constructor: Animal.call(this, name) (Basically using super)
+			- It's running the Animal initilization logic on the current dog instance
+		- Currently the recommended way to establish prototypical inheritance
+- Another method is the old Surrogate trick
+	a. It's covered above in the beginning of the notes, review there.
+- New way in ES6
+	a. Basically just use extends, which is syntactic sugar
+	b. Can access overwritten parent's class functions using super w/ parameters
+	c. can also use super.methodName()
+-----------------------------------------------------------------------
+- If you require modules in front-end Javascript, must do everything in order
+because if browsers execute HTML top down. Must be wary of dependencies.
+- Browser has single namespace called window shared across all js files
+- Use module bundlers instead!
+	a. Run thru all source files and bundle into a single file
+	b. It requires its dependencies explicitly then exports the obj it's responsible for
+	c. Does via abstract syntax tree
+	d. Don't need to worry about order, and you can only export only objs you want,
+		same syntax as node
+	e. Webpack is the module bundler we'll be using
+		- npm install -g webpack webpack-cli
+		- webpack app.js -o bundle.js --mode=development
+		  a. Webpack will find any file named app.js in current directory and bundle
+				it w/ any files it requires and output to bundle.js, mode flag tells to
+				optimize for developemtn rather than production.
+			b. html file would have <script src="bundle.js"></script>
+-----------------------------------------------------------------------------
+https://joshondesign.com/p/books/canvasdeepdive/chapter01.html
+- Basic drawing using Canvas in the browser
+- All it does is draw pixels to the screen, huh that's like 42's graphic library
+SVG -> existing shapes
+CSS or DOM -> large static areas or 3d transforms
+Canvas -> charts/graphs/dynamic diagrams/video games
+Canvas 2D api, there is also a 3D api in the works called WebGL.
+That's pretty cool-- will review in future if I plan to make a browser game.
+
+Quiz
+- Review of spread operator
+- fillStyle
+- module bundler
+- __proto__ points to obj used in lookup chain
+- prototype is an obj that stores property/methods that will be inherited
+	by objects further down the chain
+- an instance points to class's prototype
+--------------------------------------------------------------------------
+Asynchronous Client-Side Code:
+e.g setInterval, when JS code is being run, stops browser from doing other things
+like running other JS codes, making requests, rendering HTML, scrolling, etc
+- Browser provides that functionality thru web APIs
+- requestAnimationFrame > setInterval, jus executes function when browser is ready,
+	inside callback should call requestAnimationFrame
+
+Closet thing to gets in Ruby is prompt(), BUT DO NOT USE IT.
+- It pops up an input box for user to type in text and blocks entire page
+	until they do...
+
+Asynchronous solution:
+- register(bind) a function(handler) to be called by browser when an event occurs
+- e.g #onclick
+- JS asks browser to notify us of events -> listen for etc event -> browser
+	calls any JS code that has been registered as handler when event occurs
+--------------------------------------------------------------------------
+Client-side Javascript:

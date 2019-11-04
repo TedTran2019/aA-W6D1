@@ -222,3 +222,8 @@ export -> require -> declare on window
 
 https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event#Example
 Events!
+
+for (let key in obj) is pretty damn useful as well, so is JSON.stringify...
+== to check if two objects are the same object
+
+https://github.com/madrobby/keymaster

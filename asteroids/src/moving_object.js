@@ -1,5 +1,6 @@
 function MovingObject(options) {
 	this.pos = options.pos;
+	this.game = options.game;
 	this.vel = options.vel;
 	this.radius = options.radius;
 	this.color = options.color;
@@ -21,10 +22,26 @@ MovingObject.prototype.draw = function(ctx) {
 };
 
 MovingObject.prototype.move = function() {
-	this.pos = [
+	this.pos = this.game.wrap([
 		this.pos[0] + this.vel[0],
 		this.pos[1] + this.vel[1]
-	]
+	]);
+};
+
+// Collided if distance between center points is less than sum of radii
+// Utilizes distance formula
+MovingObject.prototype.isCollidedWith = function (otherObject) {
+	let radiiSum = this.radius + otherObject.radius;
+	let distance_btwn = Math.sqrt(
+		Math.pow(otherObject.pos[0] - this.pos[0], 2) +
+		Math.pow(otherObject.pos[1] - this.pos[1], 2)
+	);
+	return distance_btwn < radiiSum;
+};
+
+MovingObject.prototype.collideWith = function (otherObject) {
+	// this.game.remove(this);
+	// this.game.remove(otherObject);
 };
 
 module.exports = MovingObject;

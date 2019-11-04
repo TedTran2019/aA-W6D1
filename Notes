@@ -158,3 +158,67 @@ Canvas:
 https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
 Basic animations! That's actually really cool.
 --------------------------------------------------------------------------
+Another css review:
+border-radius, content, position, transform, how to make triangles, overflow,
+letter-spacing, text-transform, box-shadow
+
+overflow:hidden alone was enough, didn't need to set the height.
+Making triangles in CSS is kind of a pain... but I guess it's good
+practice regardless.
+-----------------------------------------------------------------------
+Know how to use arguments and the ... rest operator
+Be able to set the context of a function in multiple ways
+Be able to write currying functions
+Be able to explain how currying works
+Know how to combine arguments from different calls of a curried function
+
+Both this and arguments are reset on every function invocation
+
+- Functional programming paradigm - focuses on function composition (writing
+	functions which are givena function as arg and return a new function)
+	a. Pattern: currying, decomposing a function that takes several arguments
+		into one that takes single arguments successively until it has the
+		sufficient number of arguments to run
+	b. curry functions are pretty damn cool and useful
+
+Remember that Es6 arrow functions don't have its own "this", the enclosing
+execution context is used. If you used regular function for the internal
+function, you would have had to store "this" to a variable in the outer
+function then use it in the inner, like "that" or a more descriptive name.
+-----------------------------------------------------------------------
+Be able to write and explain Function.prototype.inherits
+Know what a Surrogate class does and why we need it
+Know what the constructor property does
+Know what __proto__ is
+Know what new does
+Know what Object.create does
+Know how to test an inheritance implementation
+--------------------------------------------------
+Be able to implement prototypal inheritance to give a class another class's methods and attributes
+Be able to include JavaScript in a web page
+Know how Webpack works
+Know how to test JavaScript code using window.x = x
+Know how to render information from JavaScript objects on a page
+Know how to draw on a web page using Canvas
+
+Handicap: No using ES6 class syntax as it's syntactic sugar
+
+Vectors: 2D vectors have x / y.
+Position vector: has x and y position
+Velocity vector: has a speed in x and y directions
+
+Distance formula:
+- sqrt ( (x2 - x1)^2 + (y2 - y1)^2 )
+
+- Vector norm: aka, magnitude or length. Norm of velocity vector is speed
+	a. Calculate it using the distance formula
+
+"npx webpack --watch --mode=development" after doing setup steps
+- This creates a dist/main.js that loads index.js file, any file it requires,
+	and any file those files require. Remember that index.js is the entry file
+	for running the project!
+
+export -> require -> declare on window
+
+https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event#Example
+Events!

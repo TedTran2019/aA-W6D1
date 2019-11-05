@@ -22,10 +22,16 @@ MovingObject.prototype.draw = function(ctx) {
 };
 
 MovingObject.prototype.move = function() {
-	this.pos = this.game.wrap([
+	let new_pos = [
 		this.pos[0] + this.vel[0],
 		this.pos[1] + this.vel[1]
-	]);
+	];
+
+	if (!this.isWrappable && this.game.isOutOfBounds(new_pos)) {
+		this.game.remove(this);
+	} else {
+		this.pos = this.game.wrap(new_pos);
+	}
 };
 
 // Collided if distance between center points is less than sum of radii
@@ -43,5 +49,7 @@ MovingObject.prototype.collideWith = function (otherObject) {
 	// this.game.remove(this);
 	// this.game.remove(otherObject);
 };
+
+MovingObject.prototype.isWrappable = true;
 
 module.exports = MovingObject;

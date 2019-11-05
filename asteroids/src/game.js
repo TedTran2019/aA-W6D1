@@ -5,6 +5,7 @@ function Game() {
 	this.asteroids = [];
 	this.addAsteroids();
 	this.ship = new Ship(this.randomPosition(), this);
+	this.bullets = [];
 }
 
 Game.prototype.addAsteroids = function () {
@@ -65,18 +66,44 @@ Game.prototype.step = function () {
 	this.checkCollisions();
 };
 
-Game.prototype.remove = function (asteroid) {
-	this.asteroids.forEach((el, i) => {
-		if (el == asteroid) {
-			this.asteroids.splice(i, 1);
-			return;
-		}
-	});
+Game.prototype.remove = function (obj) {
+	if (obj instanceof Asteroid) {
+		this.asteroids.forEach((el, i) => {
+			if (el == obj) {
+				this.asteroids.splice(i, 1);
+				return;
+			}
+		});
+	} else {
+		this.bullets.forEach((el, i) => {
+			if (el == obj) {
+				this.bullets.splice(i, 1);
+				return;
+			}
+		});
+	}
 };
 
 Game.prototype.allObjects = function () {
-	return this.asteroids.concat([this.ship]);
+	return this.asteroids.concat(this.bullets).concat([this.ship]);
 };
+
+Game.prototype.add = function (obj) {
+	if (obj instanceof Asteroid) {
+		this.asteroids.push(obj);
+	} else {
+		this.bullets.push(obj);
+	}
+};
+
+Game.prototype.isOutOfBounds = function (pos) {
+	let x = pos[0];
+	let y = pos[1];
+	if (x < 0 || y < 0 || x > Game.DIM_X || y > Game.DIM_Y) {
+		return true;
+	}
+	return false;
+}
 
 Game.DIM_X = 1000;
 Game.DIM_Y = 1000;

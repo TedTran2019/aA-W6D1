@@ -1,5 +1,7 @@
 const MovingObject = require('./moving_object.js');
 const Util = require('./utils.js');
+const Bullet = require('./bullet.js');
+
 Util.inherits(Ship, MovingObject);
 
 function Ship(pos, game) {
@@ -22,6 +24,15 @@ Ship.prototype.power = function (impulse) {
 		this.vel[0] + impulse[0],
 		this.vel[1] + impulse[1]
 	];
+};
+
+Ship.prototype.fireBullet = function () {
+	let bullet_vel = [
+		this.vel[0] * 3,
+		this.vel[1] * 3
+	];
+	let bullet = new Bullet(this.pos, this.game, bullet_vel);
+	this.game.add(bullet);
 };
 
 Ship.RADIUS = 5;

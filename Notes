@@ -227,3 +227,17 @@ for (let key in obj) is pretty damn useful as well, so is JSON.stringify...
 == to check if two objects are the same object
 
 https://github.com/madrobby/keymaster
+
+Wasted a lot of time on a recursive require... Apparently it doesn't raise an error,
+it just doesn't get loaded. (I think that's the problem, at least)
+
+Another issue was isWrappable, you can't just do a this.isWrappable = false in
+the child constructor. You have to do Etc.prototype.isWrappable = false or true
+in the parent and child to make it more easily over-writable. I guess that makes sense
+since these are traits inherent to all instances, not just one particular instance.
+
+Going to skip the bonus of using requestAnimationFrame for now. I'll come
+back to it eventually seems important for games.
+
+- Nov 4th, 2019. Bonus on asteroids wasn't done, will get back to it.
+-------------------------------------------------------------------------------
